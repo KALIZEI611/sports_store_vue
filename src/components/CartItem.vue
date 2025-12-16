@@ -31,7 +31,6 @@ const categoryColor = computed(() => {
   <div
     class="flex items-center border border-slate-200 p-4 rounded-xl gap-4 hover:bg-gray-50 transition-colors"
   >
-    <!-- Изображение товара -->
     <img
       :src="imageUrl"
       :alt="title"
@@ -43,14 +42,12 @@ const categoryColor = computed(() => {
         <div>
           <p class="font-medium text-gray-800">{{ title }}</p>
           <div class="flex items-center gap-2 mt-2 flex-wrap">
-            <!-- Бейдж категории -->
             <span
               :class="['text-xs px-2 py-1 rounded font-medium', categoryColor]"
             >
               {{ category }}
             </span>
 
-            <!-- Размер -->
             <span
               v-if="size"
               class="text-sm px-2 py-1 bg-gray-100 rounded text-gray-700"
@@ -60,7 +57,6 @@ const categoryColor = computed(() => {
           </div>
         </div>
 
-        <!-- Кнопка удаления -->
         <img
           @click="emit('onClickRemove')"
           class="opacity-60 hover:opacity-100 cursor-pointer transition w-5 h-5"
@@ -69,7 +65,6 @@ const categoryColor = computed(() => {
         />
       </div>
 
-      <!-- Цена -->
       <div class="flex justify-between items-center mt-4">
         <b class="text-lg text-gray-800">{{ price }} руб.</b>
       </div>

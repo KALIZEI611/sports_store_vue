@@ -3,7 +3,6 @@ body {
   background: rgb(208, 233, 255);
 }
 
-/* Стили для скролла */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -22,12 +21,10 @@ body {
   background: #555;
 }
 
-/* Затемнение контента при открытой корзине */
 .dimmed {
   filter: brightness(0.7);
 }
 
-/* Плавные переходы */
 * {
   transition: opacity 0.3s ease, filter 0.3s ease;
 }

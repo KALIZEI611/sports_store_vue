@@ -8,7 +8,6 @@ defineProps({
 
 const emit = defineEmits(["addToFavorite", "addToCart"]);
 
-// Функция для передачи выбранного размера
 const handleAddToFavorite = (item) => {
   emit("addToFavorite", item);
 };
