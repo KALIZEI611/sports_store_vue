@@ -41,10 +41,8 @@ const createOrder = async () => {
 </script>
 
 <template>
-  <!-- Затемненный фон -->
   <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
 
-  <!-- Сама корзина -->
   <div class="bg-white w-96 h-full fixed right-0 top-0 z-20 p-8 flex flex-col">
     <DrawerHeader />
 
@@ -65,12 +63,10 @@ const createOrder = async () => {
     </div>
 
     <div v-else class="flex flex-col flex-1 overflow-hidden">
-      <!-- Область со скроллом для списка товаров -->
       <div class="flex-1 overflow-y-auto pr-2">
         <CartItemList />
       </div>
 
-      <!-- Фиксированная область с итогами и кнопкой -->
       <div class="flex flex-col gap-4 mt-7 flex-shrink-0">
         <div class="flex gap-2 items-center">
           <span class="text-gray-600">Итого:</span>

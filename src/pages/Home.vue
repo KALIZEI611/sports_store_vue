@@ -62,7 +62,6 @@ const resetFilters = () => {
 const addToFavorite = async (item) => {
   try {
     if (!item.isFavorite) {
-      // Добавляем в избранное вместе с выбранным размером
       const obj = {
         item_id: item.id,
         selectedSize: item.selectedSize || item.availableSizes?.[0] || "",
@@ -73,7 +72,6 @@ const addToFavorite = async (item) => {
         obj
       );
 
-      // НЕМЕДЛЕННО обновляем состояние
       const itemIndex = items.value.findIndex((i) => i.id === item.id);
       if (itemIndex !== -1) {
         items.value[itemIndex].isFavorite = true;
@@ -84,7 +82,6 @@ const addToFavorite = async (item) => {
         `https://5c4f68a7b58c636d.mokky.dev/favorites/${item.favoritesId}`
       );
 
-      // НЕМЕДЛЕННО обновляем состояние
       const itemIndex = items.value.findIndex((i) => i.id === item.id);
       if (itemIndex !== -1) {
         items.value[itemIndex].isFavorite = false;
@@ -140,7 +137,6 @@ const fetchItems = async () => {
   } catch (e) {
     console.error("Ошибка загрузки товаров с API:", e);
 
-    // Резервные данные
     const backupItems = [
       {
         id: 1,
@@ -181,7 +177,6 @@ const fetchItems = async () => {
 
     let data = [...backupItems];
 
-    // Применяем фильтры
     if (filters.category !== "all") {
       data = data.filter((item) => item.category === filters.category);
     }
@@ -209,7 +204,6 @@ const fetchItems = async () => {
       data = data.filter((item) => item.sizes.includes(filters.size));
     }
 
-    // Сортировка
     if (filters.sortBy === "price") {
       data.sort((a, b) => a.price - b.price);
     } else if (filters.sortBy === "-price") {
@@ -289,7 +283,6 @@ watch(cart, () => {
 watch(filters, fetchItems);
 </script>
 
-<!-- Остальной template без изменений -->
 
 <template>
   <div class="mb-10">
@@ -323,7 +316,6 @@ watch(filters, fetchItems);
       </div>
     </div>
 
-    <!-- Фильтры -->
     <div class="bg-gray-50 p-6 rounded-xl mb-8">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold">Фильтры</h3>
@@ -336,7 +328,6 @@ watch(filters, fetchItems);
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <!-- Категория -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
             Категория
@@ -356,7 +347,6 @@ watch(filters, fetchItems);
           </select>
         </div>
 
-        <!-- Размер -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
             Размер
@@ -373,7 +363,6 @@ watch(filters, fetchItems);
           </select>
         </div>
 
-        <!-- Цена от -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
             Цена от
@@ -393,7 +382,6 @@ watch(filters, fetchItems);
           />
         </div>
 
-        <!-- Цена до -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
             Цена до
@@ -416,7 +404,6 @@ watch(filters, fetchItems);
     </div>
   </div>
 
-  <!-- Индикатор загрузки -->
   <div v-if="isLoading" class="text-center py-12">
     <div
       class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
@@ -424,7 +411,6 @@ watch(filters, fetchItems);
     <p class="mt-4 text-gray-600">Загрузка товаров...</p>
   </div>
 
-  <!-- Если товаров нет -->
   <div v-else-if="items.length === 0" class="text-center py-12">
     <div class="text-4xl mb-4">🛍️</div>
     <h3 class="text-xl font-semibold mb-2">Товары не найдены</h3>
@@ -437,7 +423,6 @@ watch(filters, fetchItems);
     </button>
   </div>
 
-  <!-- Отображение товаров -->
   <div v-else class="mt-10">
     <p class="text-gray-600 mb-4">Найдено {{ items.length }} товаров</p>
     <CardList

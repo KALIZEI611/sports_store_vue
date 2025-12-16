@@ -10,7 +10,6 @@ onMounted(async () => {
   try {
     isLoading.value = true;
 
-    // Загружаем избранное
     const { data: favoritesData } = await axios.get(
       "https://5c4f68a7b58c636d.mokky.dev/favorites"
     );
@@ -21,29 +20,23 @@ onMounted(async () => {
       return;
     }
 
-    // Получаем ID всех избранных товаров
     const itemIds = favoritesData.map((fav) => fav.item_id);
 
-    // Загружаем все спортивные костюмы
     const { data: sportsuits } = await axios.get(
       "https://5c4f68a7b58c636d.mokky.dev/sportsuits"
     );
 
 
-    // Фильтруем только избранные товары
     const favoriteItems = sportsuits.filter((item) =>
       itemIds.includes(item.id)
     );
 
 
-    // Форматируем данные
     favorites.value = favoriteItems.map((item) => {
       const favorite = favoritesData.find((fav) => fav.item_id === item.id);
 
-      // Получаем сохраненный размер из favoritesData или из localStorage
       let savedSize = favorite?.selectedSize || "";
 
-      // Если в favoritesData нет размера, пробуем получить из localStorage
       if (!savedSize) {
         const savedSizes = JSON.parse(
           localStorage.getItem("selectedSizes") || "{}"
@@ -51,7 +44,6 @@ onMounted(async () => {
         savedSize = savedSizes[item.id] || "";
       }
 
-      // Если сохраненного размера нет в доступных, берем первый доступный
       const availableSizes = item.sizes ? item.sizes.split(",") : [];
       if (savedSize && !availableSizes.includes(savedSize)) {
         savedSize = availableSizes[0] || "";
@@ -64,7 +56,7 @@ onMounted(async () => {
         isFavorite: true,
         favoritesId: favorite?.id || null,
         availableSizes: availableSizes,
-        selectedSize: savedSize, // Добавляем сохраненный размер
+        selectedSize: savedSize, 
       };
     });
 
@@ -81,7 +73,6 @@ onMounted(async () => {
   <div>
     <h2 class="text-3xl font-bold mb-8">Мои закладки</h2>
 
-    <!-- Индикатор загрузки -->
     <div v-if="isLoading" class="text-center py-12">
       <div
         class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
@@ -89,7 +80,6 @@ onMounted(async () => {
       <p class="mt-4 text-gray-600">Загрузка избранного...</p>
     </div>
 
-    <!-- Если нет избранных товаров -->
     <div v-else-if="favorites.length === 0" class="text-center py-12">
       <div class="text-5xl mb-4 opacity-60">❤️</div>
       <h3 class="text-xl font-semibold mb-2 text-gray-700">
@@ -107,7 +97,6 @@ onMounted(async () => {
       </router-link>
     </div>
 
-    <!-- Отображение избранных товаров -->
     <div v-else>
       <p class="text-gray-600 mb-6">
         Найдено {{ favorites.length }}
