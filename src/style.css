@@ -1,7 +1,6 @@
 @import "tailwindcss";
-
 body {
-  background: rgb(247, 254, 231);
+  background: rgb(208, 233, 255);
 }
 
 /* Стили для скролла */

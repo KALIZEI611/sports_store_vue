@@ -1,6 +1,5 @@
 <script setup>
 import { computed, provide, ref, watch } from "vue";
-import axios from "axios";
 import Header from "./components/Header.vue";
 import Drawer from "./components/Drawer.vue";
 
