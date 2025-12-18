@@ -57,7 +57,7 @@ provide("cart", {
   <Drawer v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
 
   <div
-    class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14"
+    class="bg-white w-5/6 m-auto rounded-xl shadow-xl mt-10"
     :class="{ 'opacity-70': drawerOpen }"
   >
     <Header :total-price="totalPrice" @open-drawer="openDrawer" />
