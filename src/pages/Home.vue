@@ -283,7 +283,6 @@ watch(cart, () => {
 watch(filters, fetchItems);
 </script>
 
-
 <template>
   <div class="mb-10">
     <div class="flex justify-between items-center mb-6">
